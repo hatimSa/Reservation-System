@@ -1,0 +1,44 @@
+### Test Authentication System
+
+### 1. Register a new restaurant owner
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@restaurant.com",
+  "phone": "+1234567890",
+  "password": "password123"
+}
+
+### 2. Login with the registered user
+POST http://localhost:8080/api/auth/authenticate
+Content-Type: application/json
+
+{
+  "email": "john@restaurant.com",
+  "password": "password123"
+}
+
+### 3. Test protected endpoint - Get all reservations (should work with token)
+GET http://localhost:8080/api/reservations
+Authorization: Bearer YOUR_TOKEN_HERE
+
+### 4. Test protected endpoint - Create a reservation (should work with token)
+POST http://localhost:8080/api/reservations
+Authorization: Bearer YOUR_TOKEN_HERE
+Content-Type: application/json
+
+{
+  "date": "2025-01-15",
+  "time": "17:30:00",
+  "numberOfGuests": 4,
+  "tableType": "Standard",
+  "status": "ACTIVE",
+  "tableId": 1,
+  "guestId": 1
+}
+
+### 5. Test logout
+POST http://localhost:8080/api/auth/logout
+Authorization: Bearer YOUR_TOKEN_HERE
